@@ -8,15 +8,12 @@ QuickKart is a lightweight, responsive e-commerce web application designed for l
 
 - 🔐 **Authentication** – Signup, Login, JWT-based auth, Forgot Password
 - 🛍️ **Product Management (CRUD)** – Add, edit, delete products (sellers only)
-- 🔎 **Filters & Sorting** – Filter by category, price, and availability; sort by price, rating, date
-- ❤️ **Bookmarks** – Buyers can bookmark favorite products
-- 🧑‍💼 **User Profiles** – Bio, contact info, profile picture
-- 📸 **Image Uploads** – Add images to products using Multer
-- 🔔 **Notifications** – Toasts and alerts for actions
+- 🔎 **Filters & Sorting** – Filter by category and availability;
+- 🧑‍💼 **User Profiles** – Bio, contact info
+- 📸 **Image Uploads** – Add images to products
 - 📱 **Responsive Design** – Mobile-first layout using TailwindCSS
 - 🔐 **Route Protection** – Auth-required for seller/product/admin routes
 - ✅ **Confirmation Dialogs** – Edits and deletes require confirmation
-- 🔍 **Live Search Suggestions** – Debounced autocomplete search
 - 🧾 **Multi-step Forms** – Seamless product upload with preview
 - 🛠️ **Admin Panel** – Remove spam users/products
 - 🌐 **Multi-language Support** – UI available in multiple languages (coming soon)
@@ -54,7 +51,7 @@ QuickKart is a lightweight, responsive e-commerce web application designed for l
 | Layer       | Technology                  |
 |-------------|-----------------------------|
 | Frontend    | React.js, React Router DOM  |
-| Styling     | TailwindCSS                 |
+| Styling     |Material UI               |
 | Backend     | Node.js, Express.js         |
 | Database    | MongoDB + Mongoose          |
 | State Mgmt  | Context API                 |
