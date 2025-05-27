@@ -7,6 +7,7 @@ import {
     Typography,
     Divider,
     IconButton,
+    useTheme,
 } from '@mui/material';
 import ListIcon from '@mui/icons-material/List';
 import CloseIcon from '@mui/icons-material/Close';
@@ -16,7 +17,6 @@ import LocalMallIcon from '@mui/icons-material/LocalMall';
 import Logout from '../Logout';
 import SideBar from './components/SideBar';
 import SellerHomePage from './pages/SellerHomePage';
-
 import AccountMenu from './components/AccountMenu';
 import ShowProducts from './pages/ShowProducts';
 import ShowOrders from './pages/ShowOrders';
@@ -31,173 +31,149 @@ import SellerProfile from './pages/SellerProfile';
 
 const SellerDashboard = () => {
     const [open, setOpen] = useState(false);
-    const toggleDrawer = () => {
-        setOpen(!open);
-    };
-
+    const toggleDrawer = () => setOpen(!open);
     const { currentRole } = useSelector(state => state.user);
+    const navigate = useNavigate();
+    const theme = useTheme();
 
-    const navigate = useNavigate()
-
-    const homeHandler = () => {
-        navigate("/")
-    };
+    const homeHandler = () => navigate("/");
 
     return (
-        <>
-            <Box sx={{ display: 'flex' }}>
-                <CssBaseline />
-                <AppBar open={open} position='absolute' sx={{ backgroundColor: "#4d1c9c" }}>
-                    <Toolbar sx={{ pr: '24px' }}>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={toggleDrawer}
-                            sx={{
-                                marginRight: '36px',
-                                ...(open && { display: 'none' }),
-                            }}
-                        >
-                            <ListIcon />
-                        </IconButton>
+        <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: theme.palette.background.default, color: '#333', fontSize: '16px', padding: '4px' }}>
+            <CssBaseline />
 
-                        {/* Desktop */}
-                        <Typography
-                            component="h1"
-                            variant="h6"
-                            color="inherit"
-                            noWrap
-                            sx={{
-                                mr: 2,
-                                flexGrow: 1,
-                                display: { xs: 'none', md: 'flex' },
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'inherit',
-                                textDecoration: 'none',
-                                cursor: "pointer"
-                            }}
-                        >
-                            <NavLogo
-                                to="top"
-                                activeClass="active"
-                                spy={true}
-                                smooth={true}
-                                offset={-70}
-                                duration={500}
-                                onClick={homeHandler}
-                            >
-                                <LocalMallIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <AppBar open={open} position='absolute' sx={{ backgroundColor: theme.palette.primary.main, boxShadow: 3, padding: '8px' }}>
+                <Toolbar sx={{ pr: 2, minHeight: '64px', padding: '12px 24px' }}>
+                    <IconButton
+                        edge="start"
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={toggleDrawer}
+                        sx={{ marginRight: 2, padding: '6px', ...(open && { display: 'none' }) }}
+                    >
+                        <ListIcon fontSize="medium" />
+                    </IconButton>
 
-                                SHOPCART
-                            </NavLogo>
-                        </Typography>
+                    <Typography
+                        component="h1"
+                        variant="h6"
+                        color="inherit"
+                        noWrap
+                        sx={{
+                            mr: 2,
+                            flexGrow: 1,
+                            display: { xs: 'none', md: 'flex' },
+                            fontWeight: 700,
+                            letterSpacing: '.2rem',
+                            cursor: "pointer",
+                            fontSize: '22px',
+                            color: '#fafafa'
+                        }}
+                        onClick={homeHandler}
+                    >
+                        <NavLogo>
+                            <LocalMallIcon sx={{ mr: 1, fontSize: '28px', color: '#fff' }} /> SHOPCART
+                        </NavLogo>
+                    </Typography>
 
-                        {/* Mobile */}
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        sx={{
+                            flexGrow: 1,
+                            display: { xs: 'flex', md: 'none' },
+                            fontWeight: 700,
+                            letterSpacing: '.2rem',
+                            cursor: "pointer",
+                            fontSize: '20px',
+                            color: '#ddd'
+                        }}
+                        onClick={homeHandler}
+                    >
+                        <NavLogo>
+                            <LocalMallIcon sx={{ mr: 1, fontSize: '26px', color: '#eee' }} /> QUICKKART
+                        </NavLogo>
+                    </Typography>
 
-                        <Typography
-                            variant="h5"
-                            noWrap
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'flex', md: 'none' },
-                                flexGrow: 1,
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'inherit',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            <NavLogo
-                                to="top"
-                                activeClass="active"
-                                spy={true}
-                                smooth={true}
-                                offset={-70}
-                                duration={500}
-                                onClick={homeHandler}
-                            >
-                                <LocalMallIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <AccountMenu />
+                </Toolbar>
+            </AppBar>
 
-                                SHOPCART
-                            </NavLogo>
-                        </Typography>
+            <Drawer variant="permanent" open={open} sx={open ? styles.drawerStyled : styles.hideDrawer}>
+                <Toolbar sx={styles.toolBarStyled}>
+                    <IconButton onClick={toggleDrawer} sx={{ color: '#666' }}>
+                        <CloseIcon />
+                    </IconButton>
+                </Toolbar>
+                <Divider sx={{ backgroundColor: '#ccc' }} />
+                <List component="nav" sx={{ padding: '12px' }}>
+                    <SideBar />
+                </List>
+            </Drawer>
 
-                        <AccountMenu />
-                    </Toolbar>
-                </AppBar>
-                <Drawer variant="permanent" open={open} sx={open ? styles.drawerStyled : styles.hideDrawer}>
-                    <Toolbar sx={styles.toolBarStyled}>
-                        <IconButton onClick={toggleDrawer}>
-                            <CloseIcon />
-                        </IconButton>
-                    </Toolbar>
-                    <Divider />
-                    <List component="nav">
-                        <SideBar />
-                    </List>
-                </Drawer>
-                <Box component="main" sx={styles.boxStyled}>
-                    <Toolbar />
-                    <Routes>
-                        <Route path="/" element={<SellerHomePage />} />
-                        <Route path='*' element={<Navigate to="/" />} />
-                        <Route path="/Seller/dashboard" element={<SellerHomePage />} />
-                        <Route path="/Seller/profile" element={<SellerProfile />} />
-
-                        {/* Class */}
-                        <Route path="/Seller/addproduct" element={<AddProduct />} />
-                        <Route path="/Seller/products" element={<ShowProducts />} />
-                        <Route path="/Seller/products/product/:id" element={<ViewProductSeller />} />
-
-                        {
-                            currentRole === "Shopcart" &&
-                            <>
-                                <Route path="/Seller/shopcart" element={<ShopcartSpecial />} />
-                                <Route path="/Seller/uploadproducts" element={<Products productData={productDataList} />} />
-                            </>
-                        }
-
-                        <Route path="/Seller/orders" element={<ShowOrders />} />
-                        <Route path="/Seller/orders/customers/:id" element={<ShowCustomers />} />
-                        <Route path="/Seller/orders/product/:id" element={<ViewProductSeller />} />
-
-                        <Route path="/logout" element={<Logout />} />
-                    </Routes>
-                </Box>
-            </Box >
-        </>
+            <Box component="main" sx={styles.boxStyled(theme)}>
+                <Toolbar />
+                <Routes>
+                    <Route path="/" element={<SellerHomePage />} />
+                    <Route path='*' element={<Navigate to="/" />} />
+                    <Route path="/Seller/dashboard" element={<SellerHomePage />} />
+                    <Route path="/Seller/profile" element={<SellerProfile />} />
+                    <Route path="/Seller/addproduct" element={<AddProduct />} />
+                    <Route path="/Seller/products" element={<ShowProducts />} />
+                    <Route path="/Seller/products/product/:id" element={<ViewProductSeller />} />
+                    {currentRole === "Shopcart" && (
+                        <>
+                            <Route path="/Seller/shopcart" element={<ShopcartSpecial />} />
+                            <Route path="/Seller/uploadproducts" element={<Products productData={productDataList} />} />
+                        </>
+                    )}
+                    <Route path="/Seller/orders" element={<ShowOrders />} />
+                    <Route path="/Seller/orders/customers/:id" element={<ShowCustomers />} />
+                    <Route path="/Seller/orders/product/:id" element={<ViewProductSeller />} />
+                    <Route path="/logout" element={<Logout />} />
+                </Routes>
+            </Box>
+        </Box>
     );
-}
+};
 
-export default SellerDashboard
+export default SellerDashboard;
 
 const styles = {
-    boxStyled: {
-        backgroundColor: (theme) =>
-            theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+    boxStyled: (theme) => ({
+        backgroundColor: theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
         flexGrow: 1,
-        height: '100vh',
+        padding: 3,
+        borderRadius: 3,
+        margin: 2,
         overflow: 'auto',
-    },
+        fontSize: '15px',
+        color: theme.palette.text.primary,
+        marginTop: '16px'
+    }),
     toolBarStyled: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
         px: [1],
+        backgroundColor: '#e0e0e0',
+        height: '64px'
     },
     drawerStyled: {
-        display: "flex"
-    },
-    hideDrawer: {
-        display: 'flex',
-        '@media (max-width: 600px)': {
-            display: 'none',
+        width: 240,
+        flexShrink: 0,
+        '& .MuiDrawer-paper': {
+            width: 240,
+            boxSizing: 'border-box',
+            backgroundColor: '#f9f9f9',
+            boxShadow: 3,
+            padding: '12px'
         },
     },
-}
+    hideDrawer: {
+        display: 'none',
+        '@media (min-width: 600px)': {
+            display: 'block',
+        },
+    },
+};
