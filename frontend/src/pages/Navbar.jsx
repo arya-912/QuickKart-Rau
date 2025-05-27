@@ -1,24 +1,14 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import SearchIcon from '@mui/icons-material/Search';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
-import LocalMallIcon from '@mui/icons-material/LocalMall';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Login, Logout, Shop2, Store } from '@mui/icons-material';
-
+import {
+    AppBar, Box, Toolbar, IconButton, Typography, Menu, MenuItem,
+    Button, Tooltip, Avatar, Divider, Drawer, Badge, ListItemIcon, Container
+} from '@mui/material';
+import {
+    Search as SearchIcon, Login, Logout, Shop2, Store, ShoppingCart as ShoppingCartIcon
+} from '@mui/icons-material';
 import { Link, useNavigate } from 'react-router-dom';
-import { Avatar, Badge, Divider, Drawer, ListItemIcon } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { styled } from 'styled-components';
-import { NavLogo } from '../utils/styles';
 
 import Cart from './customer/components/Cart';
 import Search from './customer/components/Search';
@@ -26,339 +16,139 @@ import ProductsMenu from './customer/components/ProductsMenu';
 import { updateCustomer } from '../redux/userHandle';
 
 const Navbar = () => {
-    const { currentUser, currentRole } = useSelector(state => state.user);
-
-    const totalQuantity = currentUser && currentUser.cartDetails && currentUser.cartDetails.reduce((total, item) => total + item.quantity, 0);
-
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const { currentUser, currentRole } = useSelector(state => state.user);
+    const totalQuantity = currentUser?.cartDetails?.reduce((total, item) => total + item.quantity, 0) || 0;
+
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElSign, setAnchorElSign] = React.useState(null);
+    const [isCartOpen, setIsCartOpen] = React.useState(false);
 
     React.useEffect(() => {
         if (currentRole === "Customer") {
-            console.log(currentUser);
             dispatch(updateCustomer(currentUser, currentUser._id));
         }
-    }, [currentRole, currentUser, dispatch])
-
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [anchorElSign, setAnchorElSign] = React.useState(null);
-
-    const open = Boolean(anchorElUser);
-    const openSign = Boolean(anchorElSign);
-
-    const [isCartOpen, setIsCartOpen] = React.useState(false);
-
-    // Cart
-    const handleOpenCart = () => {
-        setIsCartOpen(true);
-    };
-
-    const handleCloseCart = () => {
-        setIsCartOpen(false);
-    };
-
-    // Navigation Menu
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
-
-    // User Menu
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
-
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
-
-    // Signin Menu
-    const handleOpenSigninMenu = (event) => {
-        setAnchorElSign(event.currentTarget);
-    };
-
-    const handleCloseSigninMenu = () => {
-        setAnchorElSign(null);
-    };
-
-    const homeHandler = () => {
-        navigate("/")
-    };
+    }, [currentRole, currentUser, dispatch]);
 
     return (
-        <AppBar position="sticky">
-            <Container maxWidth="xl" sx={{ backgroundColor: "#4d1c9c" }}>
-                <Toolbar disableGutters>
+        <AppBar position="sticky" sx={{ backgroundColor: "rgb(94, 142, 168)" }}>
+            <Container maxWidth="xl">
+                <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
 
-                    {/* MOBILE */}
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                        <IconButton
-                            size="large"
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={() => { navigate("/Search") }}
-                            color="inherit"
-                        >
-                            <SearchIcon />
-                        </IconButton>
+                    {/* LEFT: LOGO */}
+                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                        <LogoText onClick={() => navigate("/")}>
+                            QUICKKART
+                        </LogoText>
                     </Box>
 
-                    <HomeContainer>
-                        <Typography
-                            variant="h5"
-                            noWrap
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'flex', md: 'none' },
-                                flexGrow: 1,
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'inherit',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            <NavLogo
-                                to="top"
-                                activeClass="active"
-                                spy={true}
-                                smooth={true}
-                                offset={-70}
-                                duration={500}
-                                onClick={homeHandler}
-                            >
-                                QUICKKART
-                            </NavLogo>
-                        </Typography>
-                    </HomeContainer>
-
-                    {currentRole === null &&
-                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-                            <>
-                                <IconButton
-                                    size="large"
-                                    aria-label="account of current user"
-                                    aria-controls="menu-appbar"
-                                    aria-haspopup="true"
-                                    onClick={handleOpenNavMenu}
-                                    color="inherit"
-                                >
-                                    <Login />
-                                </IconButton>
-                                <Menu
-                                    id="menu-appbar"
-                                    anchorEl={anchorElNav}
-                                    anchorOrigin={{
-                                        vertical: 'bottom',
-                                        horizontal: 'left',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'left',
-                                    }}
-                                    open={Boolean(anchorElNav)}
-                                    onClose={handleCloseNavMenu}
-                                    onClick={handleCloseUserMenu}
-                                    sx={{
-                                        display: { xs: 'block', md: 'none' },
-                                    }}
-                                >
-                                    <MenuItem onClick={() => {
-                                        navigate("/Customerlogin")
-                                        handleCloseNavMenu()
-                                    }}>
-                                        <Typography textAlign="center">Sign in as customer</Typography>
-                                    </MenuItem>
-                                    <MenuItem onClick={() => {
-                                        navigate("/Sellerlogin")
-                                        handleCloseNavMenu()
-                                    }}>
-                                        <Typography textAlign="center">Sign in as seller</Typography>
-                                    </MenuItem>
-                                </Menu>
-                            </>
-                        </Box>
-                    }
-
-                    {/* DESKTOP */}
-
-                    <HomeContainer>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            sx={{
-                                mr: 2,
-                                display: { xs: 'none', md: 'flex' },
-                                fontFamily: 'monospace',
-                                fontWeight: 700,
-                                letterSpacing: '.3rem',
-                                color: 'inherit',
-                                textDecoration: 'none',
-                            }}
-                        >
-                            <NavLogo
-                                to="top"
-                                activeClass="active"
-                                spy={true}
-                                smooth={true}
-                                offset={-70}
-                                duration={500}
-                                onClick={homeHandler}
-                            >
-                                <LocalMallIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-
-                                QUICKKART
-                            </NavLogo>
-                        </Typography>
-                    </HomeContainer>
-
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, }}>
+                    {/* CENTER: NAV MENU */}
+                    <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', gap: 2 }}>
                         <Search />
                         <ProductsMenu dropName="Categories" />
                         <ProductsMenu dropName="Products" />
+                        <Button color="inherit" onClick={() => navigate("/about")}>About Us</Button>
                     </Box>
 
-                    {currentRole === null &&
-                        <Box sx={{ flexGrow: 0, display: { xs: 'none', md: 'flex' }, }}>
-                            <Button
-                                onClick={handleOpenSigninMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                Sign in
-                            </Button>
-                            <Menu
-                                anchorEl={anchorElSign}
-                                id="menu-appbar"
-                                open={openSign}
-                                onClose={handleCloseSigninMenu}
-                                onClick={handleCloseSigninMenu}
-                                PaperProps={{
-                                    elevation: 0,
-                                    sx: styles.styledPaper,
-                                }}
-                                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                            >
-                                <MenuItem onClick={() => navigate("/Customerlogin")}>
-                                    <Avatar />
-                                    <Link to="/Customerlogin">
-                                        Sign in as customer
-                                    </Link>
-                                </MenuItem>
-                                <Divider />
-                                <MenuItem onClick={() => navigate("/Sellerlogin")}>
-                                    <ListItemIcon>
-                                        <Store fontSize="small" />
-                                    </ListItemIcon>
-                                    <Link to="/Sellerlogin">
-                                        Sign in as seller
-                                    </Link>
-                                </MenuItem>
-                            </Menu>
-                        </Box>
-                    }
+                    {/* RIGHT: ACCOUNT / CART / SIGNIN */}
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        {currentRole === "Customer" && (
+                            <>
+                                <Tooltip title="Cart">
+                                    <IconButton onClick={() => setIsCartOpen(true)} color="inherit">
+                                        <Badge badgeContent={totalQuantity} color="error">
+                                            <ShoppingCartIcon />
+                                        </Badge>
+                                    </IconButton>
+                                </Tooltip>
 
-                    {/* BOTH */}
+                                <Tooltip title="Account settings">
+                                    <IconButton onClick={(e) => setAnchorElUser(e.currentTarget)} color="inherit">
+                                        <Avatar sx={{ bgcolor: "#8970dc", width: 32, height: 32 }}>
+                                            {String(currentUser?.name || "").charAt(0)}
+                                        </Avatar>
+                                    </IconButton>
+                                </Tooltip>
 
-                    {currentRole === "Customer" &&
-                        <Box sx={{ flexGrow: 0, display: 'flex' }}>
-                            <Tooltip title="Cart">
-                                <IconButton onClick={handleOpenCart} sx={{ width: "4rem", color: 'inherit', p: 0 }}>
-                                    <Badge badgeContent={totalQuantity} color="error">
-                                        <ShoppingCartIcon sx={{ fontSize: "2rem" }} />
-                                    </Badge>
-                                </IconButton>
-                            </Tooltip>
-                            <Tooltip title="Account settings">
-                                <IconButton
-                                    onClick={handleOpenUserMenu}
-                                    size="small"
-                                    sx={{ ml: 2 }}
-                                    aria-controls={open ? 'account-menu' : undefined}
-                                    aria-haspopup="true"
-                                    aria-expanded={open ? 'true' : undefined}
+                                <Menu
+                                    anchorEl={anchorElUser}
+                                    open={Boolean(anchorElUser)}
+                                    onClose={() => setAnchorElUser(null)}
+                                    PaperProps={{ sx: styles.styledPaper }}
                                 >
-                                    <Avatar sx={{ width: 32, height: 32, backgroundColor: "#8970dc" }}>
-                                        {String(currentUser.name).charAt(0)}
-                                    </Avatar>
-                                </IconButton>
-                            </Tooltip>
-                            <Menu
-                                anchorEl={anchorElUser}
-                                id="menu-appbar"
-                                open={open}
-                                onClose={handleCloseUserMenu}
-                                onClick={handleCloseUserMenu}
-                                PaperProps={{
-                                    elevation: 0,
-                                    sx: styles.styledPaper,
-                                }}
-                                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-                            >
-                                <MenuItem onClick={() => navigate("/Profile")}>
-                                    <Avatar />
-                                    <Link to="/Profile">
+                                    <MenuItem onClick={() => navigate("/Profile")}>
+                                        <Avatar />
                                         Profile
-                                    </Link>
-                                </MenuItem>
-                                <MenuItem onClick={() => navigate("/Orders")}>
-                                    <ListItemIcon>
-                                        <Shop2 fontSize="small" />
-                                    </ListItemIcon>
-                                    <Link to="/Orders">
+                                    </MenuItem>
+                                    <MenuItem onClick={() => navigate("/Orders")}>
+                                        <ListItemIcon><Shop2 fontSize="small" /></ListItemIcon>
                                         My Orders
-                                    </Link>
-                                </MenuItem>
-                                <Divider />
-                                <MenuItem onClick={() => navigate("/Logout")}>
-                                    <ListItemIcon>
-                                        <Logout fontSize="small" />
-                                    </ListItemIcon>
-                                    <Link to="/Logout">
+                                    </MenuItem>
+                                    <Divider />
+                                    <MenuItem onClick={() => navigate("/Logout")}>
+                                        <ListItemIcon><Logout fontSize="small" /></ListItemIcon>
                                         Logout
-                                    </Link>
-                                </MenuItem>
-                            </Menu>
-                        </Box>
-                    }
+                                    </MenuItem>
+                                </Menu>
+                            </>
+                        )}
 
+                        {currentRole === null && (
+                            <>
+                                <Button onClick={(e) => setAnchorElSign(e.currentTarget)} color="inherit">
+                                    Sign In
+                                </Button>
+
+                                <Menu
+                                    anchorEl={anchorElSign}
+                                    open={Boolean(anchorElSign)}
+                                    onClose={() => setAnchorElSign(null)}
+                                    PaperProps={{ sx: styles.styledPaper }}
+                                >
+                                    <MenuItem onClick={() => navigate("/Customerlogin")}>
+                                        <Avatar />
+                                        Sign in as Customer
+                                    </MenuItem>
+                                    <Divider />
+                                    <MenuItem onClick={() => navigate("/Sellerlogin")}>
+                                        <ListItemIcon><Store fontSize="small" /></ListItemIcon>
+                                        Sign in as Seller
+                                    </MenuItem>
+                                </Menu>
+                            </>
+                        )}
+                    </Box>
                 </Toolbar>
             </Container>
 
-            {
-                isCartOpen &&
-                <Drawer
-                    anchor="right"
-                    open={isCartOpen}
-                    onClose={handleCloseCart}
-                    sx={{
-                        width: '400px',
-                        flexShrink: 0,
-                        '& .MuiDrawer-paper': {
-                            width: '400px',
-                            boxSizing: 'border-box',
-                        },
-                    }}
-                >
-                    <Cart setIsCartOpen={setIsCartOpen} />
-                </Drawer>
-            }
-        </AppBar >
+            <Drawer
+                anchor="right"
+                open={isCartOpen}
+                onClose={() => setIsCartOpen(false)}
+                sx={{
+                    '& .MuiDrawer-paper': {
+                        width: 400,
+                        boxSizing: 'border-box',
+                    },
+                }}
+            >
+                <Cart setIsCartOpen={setIsCartOpen} />
+            </Drawer>
+        </AppBar>
     );
-}
+};
+
 export default Navbar;
 
-const HomeContainer = styled.div`
-  display: flex;
-  cursor:pointer;
+const LogoText = styled.div`
+    font-family: 'monospace';
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: .2rem;
+    color: white;
+    cursor: pointer;
 `;
 
 const styles = {
@@ -385,4 +175,4 @@ const styles = {
             zIndex: 0,
         },
     }
-}
+};

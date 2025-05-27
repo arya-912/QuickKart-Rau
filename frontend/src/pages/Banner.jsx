@@ -20,12 +20,12 @@ const Banner = () => {
             dotListClass="custom-dot-list-style"
             itemClass="carousel-item-padding-40-px"
         >
-            {bannerData.map((image) => (
-              <Image 
-                    src="https://www.newgenmax.com/wp-content/uploads/2018/07/Ecommerce-Banner-1.jpg"
-                    alt={image.alt}
-                    key={image._id}
-/>
+         {bannerData.map((image) => (
+            <Image 
+                src={image.url} 
+                alt={image.alt} 
+                key={image._id} 
+            />
             ))}
         </Carousel>
     );

@@ -75,7 +75,7 @@ const responsive = {
 
 const Component = styled(Box)`
     margin-top: 10px;
-    background: #FFFFFF;
+    background:rgb(208, 228, 232);
 `;
 
 const Deal = styled(Box)`
@@ -92,11 +92,11 @@ const DealText = styled(Typography)`
 
 const ViewAllButton = styled(Button)`
     margin-left: auto;
-    background-color: #4d1c9c;
+    background-color:rgb(57, 114, 145);
     border-radius: 2px;
     font-size: 13px;
     &:hover {
-      background-color: #7a1ccb;
+      background-color:rgb(25, 73, 112);
     }
 `;
 

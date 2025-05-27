@@ -250,7 +250,7 @@ const CartItem = styled.div`
   display: flex;
   align-items: center;
   padding: 12px;
-  background-color: #f5f5f5;
+  background-color:rgb(240, 225, 225);
   border-radius: 4px;
 `;
 

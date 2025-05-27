@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   const adURL =
-    "https://www.f6s.com/content-resource/media/4761140_23905a91e822e233094a0f1807038d8a74f6e654.jpg";
+    "https://balistars.id/wp-content/uploads/2023/05/standing-banner-web.jpg";
 
   const dispatch = useDispatch();
   const { productData, responseProducts, error } = useSelector(state => state.user);
@@ -140,8 +140,8 @@ const MobileMenuContainer = styled(Container)(({ theme }) => ({
 }));
 
 const BannerBox = styled(Box)`
-  padding: 20px 10px;
-  background:rgb(48, 212, 204);
+  padding: 18px 10px;
+  background:rgb(232, 232, 195);
 `;
 
 const CenteredContainer = styled(Container)`
@@ -155,7 +155,7 @@ const CenteredContainer = styled(Container)`
 `;
 
 const AdBox = styled(Box)`
-  background: #73c6b6;
+  background:rgb(218, 226, 225);
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(61, 62, 48, 0.05);

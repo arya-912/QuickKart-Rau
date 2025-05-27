@@ -62,10 +62,10 @@ const ProductsMenu = ({ dropName }) => {
           px: 2.5,
           py: 1,
           fontWeight: 600,
-          backgroundColor: '#f3e5f5',
-          color: '#6a1b9a',
+          backgroundColor: 'rgb(57, 114, 145)',
+          color: 'white',
           '&:hover': {
-            backgroundColor: '#e1bee7',
+            backgroundColor: 'rgb(16, 53, 73)',
           }
         }}
       >
@@ -83,11 +83,11 @@ const ProductsMenu = ({ dropName }) => {
             mt: 1,
             minWidth: 220,
             p: 1,
-            backgroundColor: '#fafafa',
+            backgroundColor: dropName === "Categories" ? '#fafafa' : '#fafafa',
           }
         }}
       >
-        <Typography variant="subtitle2" sx={{ px: 2, py: 1, color: '#6a1b9a', fontWeight: 'bold' }}>
+        <Typography variant="subtitle2" sx={{ px: 2, py: 1, color: 'rgb(57, 114, 145)', fontWeight: 'bold' }}>
           {dropName === "Categories" ? "Browse Categories" : "Browse Subcategories"}
         </Typography>
         <Divider sx={{ mb: 1 }} />
@@ -105,7 +105,7 @@ const ProductsMenu = ({ dropName }) => {
                 borderRadius: 1,
                 transition: 'all 0.2s ease-in-out',
                 '&:hover': {
-                  backgroundColor: alpha('#6a1b9a', 0.1),
+                  backgroundColor: alpha('#c15a23', 0.1),
                   transform: 'translateX(4px)',
                 },
               }}

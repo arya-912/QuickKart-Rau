@@ -7,6 +7,7 @@ import AuthenticationPage from './pages/AuthenticationPage'
 import SellerDashboard from './pages/seller/SellerDashboard'
 import CustomerSearch from './pages/customer/pages/CustomerSearch'
 import Products from './components/Products';
+import About from './pages/customer/components/about';
 import { useEffect } from 'react';
 import CustomerOrders from './pages/customer/pages/CustomerOrders';
 import CheckoutSteps from './pages/customer/pages/CheckoutSteps';
@@ -47,6 +48,7 @@ const App = () => {
             <Route path="/ProductSearch" element={<CustomerSearch mode="Desktop" />} />
 
             <Route path="/Customerregister" element={<AuthenticationPage mode="Register" role="Customer" />} />
+            <Route path="/about" element={<About />} />
             <Route path="/Customerlogin" element={<AuthenticationPage mode="Login" role="Customer" />} />
             <Route path="/Sellerregister" element={<AuthenticationPage mode="Register" role="Seller" />} />
             <Route path="/Sellerlogin" element={<AuthenticationPage mode="Login" role="Seller" />} />
@@ -62,7 +64,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/Home" element={<Home />} />
             <Route path='*' element={<Navigate to="/" />} />
-
+            <Route path="/about" element={<About />} />
             <Route path="/Products" element={<Products productData={productData} />} />
 
             <Route path="/product/view/:id" element={<ViewProduct />} />

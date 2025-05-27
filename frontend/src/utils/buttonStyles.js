@@ -41,7 +41,7 @@ export const DarkRedButton = styled(Button)`
 
 export const BlueButton = styled(Button)`
   && {
-    background-color: #080a43;
+    background-color:rgb(49, 51, 112);
     color: #fff;
     &:hover {
       background-color: #0a1e82;
@@ -51,7 +51,7 @@ export const BlueButton = styled(Button)`
 
 export const PurpleButton = styled(Button)`
   && {
-    background-color: #270843;
+    background-color:rgb(100, 52, 142);
     color: #fff;
     &:hover {
       background-color: #3f1068;
