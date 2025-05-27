@@ -8,7 +8,6 @@ import SellerDashboard from './pages/seller/SellerDashboard'
 import CustomerSearch from './pages/customer/pages/CustomerSearch'
 import Products from './components/Products';
 import { useEffect } from 'react';
-import { getProducts } from './redux/userHandle';
 import CustomerOrders from './pages/customer/pages/CustomerOrders';
 import CheckoutSteps from './pages/customer/pages/CheckoutSteps';
 import Profile from './pages/customer/pages/Profile';
@@ -24,8 +23,6 @@ const App = () => {
   const { isLoggedIn, currentToken, currentRole, productData } = useSelector(state => state.user);
 
   useEffect(() => {
-    dispatch(getProducts());
-
     if (currentToken) {
       dispatch(isTokenValid());
     }

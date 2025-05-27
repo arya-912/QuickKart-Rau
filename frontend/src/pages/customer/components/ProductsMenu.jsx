@@ -6,22 +6,18 @@ import MenuItem from '@mui/material/MenuItem';
 import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material'
 import { LightPurpleButton } from '../../../utils/buttonStyles';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, getSearchedProducts } from '../../../redux/userHandle';
+import {getSearchedProducts } from '../../../redux/userHandle';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const ProductsMenu = ({ dropName }) => {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
     const location = useLocation();
 
     const { productData } = useSelector(state => state.user);
-
-    React.useEffect(() => {
-        dispatch(getProducts());
-    }, [dispatch])
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 
