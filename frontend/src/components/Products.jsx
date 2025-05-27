@@ -98,14 +98,29 @@ const Products = ({ productData }) => {
         ))}
       </ProductGrid>
 
-      <Container sx={{ mt: 10, mb: 10, display: "flex", justifyContent: 'center', alignItems: "center" }}>
-        <Pagination
-          count={Math.ceil(productData.length / itemsPerPage)}
-          page={currentPage}
-          onChange={handlePageChange}
-          color="secondary"
-        />
-      </Container>
+      <Container sx={{ mt: 4, mb: 10, display: "flex", justifyContent: 'center', alignItems: "center", gap: 2 }}>
+      <BasicButton onClick={() => setCurrentPage(1)} disabled={currentPage === 1}>
+        First
+      </BasicButton>
+      <BasicButton onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
+        Previous
+      </BasicButton>
+      <span style={{ padding: "0 8px" }}>
+        Page {currentPage} of {Math.ceil(productData.length / itemsPerPage)}
+      </span>
+      <BasicButton
+        onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(productData.length / itemsPerPage)))}
+        disabled={currentPage === Math.ceil(productData.length / itemsPerPage)}
+      >
+        Next
+      </BasicButton>
+      <BasicButton
+        onClick={() => setCurrentPage(Math.ceil(productData.length / itemsPerPage))}
+        disabled={currentPage === Math.ceil(productData.length / itemsPerPage)}
+      >
+        Last
+      </BasicButton>
+    </Container>
 
       <Popup message={message} setShowPopup={setShowPopup} showPopup={showPopup} />
     </>

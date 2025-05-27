@@ -129,16 +129,21 @@ export const getProductsbySeller = (id) => async (dispatch) => {
     }
 }
 
-export const getProducts = () => async (dispatch) => {
+export const getProducts = (page = 1, limit = 10) => async (dispatch) => {
     dispatch(getRequest());
 
     try {
-        const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/getProducts`);
+        const result = await axios.get(`${process.env.REACT_APP_BASE_URL}/getProducts?page=${page}&limit=${limit}`);
         if (result.data.message) {
             dispatch(getProductsFailed(result.data.message));
         }
         else {
-            dispatch(productSuccess(result.data));
+            dispatch(productSuccess({
+                products: result.data.products,
+                totalPages: result.data.totalPages,
+                currentPage: result.data.currentPage,
+                totalCount: result.data.totalCount
+            }));
         }
     } catch (error) {
         dispatch(getError(error));

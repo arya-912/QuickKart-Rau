@@ -15,12 +15,22 @@ const productCreate = async (req, res) => {
 
 const getProducts = async (req, res) => {
     try {
-        let products = await Product.find().populate("seller", "shopName");
-        if (products.length > 0) {
-            res.send(products);
-        } else {
-            res.send({ message: "No products found" });
-        }
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+
+        const products = await Product.find()
+            .populate("seller", "shopName")
+            .skip(skip)
+            .limit(limit);
+
+        const total = await Product.countDocuments();
+
+        res.status(200).json({
+            products,
+            totalPages: Math.ceil(total / limit),
+            currentPage: page,
+        });
     } catch (err) {
         res.status(500).json(err);
     }

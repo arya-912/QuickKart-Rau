@@ -26,6 +26,10 @@ const initialState = {
     productDetailsCart: {},
     filteredProducts: [],
     customersList: [],
+
+    totalPages: 0,
+    currentPage: 1,
+    totalCount: 0,
 };
 
 const updateCartDetailsInLocalStorage = (cartDetails) => {
@@ -206,7 +210,11 @@ const userSlice = createSlice({
         },
 
         productSuccess: (state, action) => {
-            state.productData = action.payload;
+            const { products, totalPages, currentPage, totalCount } = action.payload;
+            state.productData = products;
+            state.totalPages = totalPages;
+            state.currentPage = currentPage;
+            state.totalCount = totalCount;
             state.responseProducts = null;
             state.loading = false;
             state.error = null;
