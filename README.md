@@ -62,5 +62,11 @@ QuickKart is a lightweight, responsive e-commerce web application designed for l
 | Deployment  | Vercel (Frontend), Render (Backend)
 
 ---
+Login 
+![image](https://github.com/user-attachments/assets/9246a48c-09fe-42b8-be4a-38dfd8aea888)
 
+Home page 
+![image](https://github.com/user-attachments/assets/e258c035-a81a-476c-b9a2-cf803e7ca2ef)
 
+About us 
+![image](https://github.com/user-attachments/assets/599fe340-66b5-4b6a-9006-0f226cc72a5e)
