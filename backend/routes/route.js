@@ -37,6 +37,7 @@ const {
     getOrderedProductsBySeller
 } = require('../controllers/orderController.js');
 
+const { createOrder, verifyPayment } = require('../controllers/paymentController.js');
 
 // Seller
 router.post('/SellerRegister', sellerRegister);
@@ -72,5 +73,9 @@ router.put('/CustomerUpdate/:id', cartUpdate);
 router.post('/newOrder', newOrder);
 router.get('/getOrderedProductsByCustomer/:id', getOrderedProductsByCustomer);
 router.get('/getOrderedProductsBySeller/:id', getOrderedProductsBySeller);
+
+// Payment
+router.post('/createOrder', createOrder);
+router.post('/verifyPayment', verifyPayment);
 
 module.exports = router;
