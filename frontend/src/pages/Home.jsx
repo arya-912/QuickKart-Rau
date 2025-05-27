@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Container, styled } from '@mui/material';
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  styled,
+  Button,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
 import Slide from './Slide';
 import Banner from './Banner';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,12 +19,13 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   const adURL =
-   "https://www.f6s.com/content-resource/media/4761140_23905a91e822e233094a0f1807038d8a74f6e654.jpg";
+    "https://www.f6s.com/content-resource/media/4761140_23905a91e822e233094a0f1807038d8a74f6e654.jpg";
+
   const dispatch = useDispatch();
-
-  const { productData, responseProducts, error } = useSelector((state) => state.user);
-
+  const { productData, responseProducts, error } = useSelector(state => state.user);
   const [showNetworkError, setShowNetworkError] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     dispatch(getProducts());
@@ -26,107 +36,141 @@ const Home = () => {
       const timeoutId = setTimeout(() => {
         setShowNetworkError(true);
       }, 40000);
-
       return () => clearTimeout(timeoutId);
     }
   }, [error]);
 
   return (
-    <div id="top">
-      <Container
-        sx={{
-          display: 'none',
-          '@media (max-width: 600px)': {
-            display: 'flex',
-          },
-        }}
-      >
-        <ProductsMenu dropName="Categories" />
-        <ProductsMenu dropName="Products" />
-      </Container>
+    <Box
+      id="top"
+      sx={{
+        background: 'linear-gradient(to bottom right,rgb(222, 227, 238), #e5e7eb)', 
+        minHeight: '100vh',
+      }}
+    >
+      {isMobile && (
+        <MobileMenuContainer>
+          <ProductsMenu dropName="Categories" />
+          <ProductsMenu dropName="Products" />
+        </MobileMenuContainer>
+      )}
+
       <BannerBox>
         <Banner />
       </BannerBox>
 
       {showNetworkError ? (
-        <StyledContainer>
-          <h1>Sorry, network error.</h1>
-        </StyledContainer>
+        <CenteredContainer>
+          <Typography variant="h4" color="error">Network Error</Typography>
+        </CenteredContainer>
       ) : error ? (
-        <StyledContainer>
-          <h1>Please Wait A Second</h1>
-          <NewtonsCradle size={70} speed={1.4} color="black" />
-        </StyledContainer>
+        <CenteredContainer>
+          <Typography variant="h5">Please wait a moment...</Typography>
+          <NewtonsCradle size={60} speed={1.4} color="black" />
+        </CenteredContainer>
       ) : (
         <>
           {responseProducts ? (
-            <>
-              <StyledContainer>No products found right now</StyledContainer>
-              <StyledContainer>
-                Become a seller to add products
-                <Link to={"/Sellerregister"}>
-                  Join
-                </Link>
-              </StyledContainer>
-            </>
+            <CenteredContainer>
+              <Typography variant="h5" sx={{ mb: 2 }}>No Products Found</Typography>
+              <Typography>Become a seller to start adding products</Typography>
+              <Button
+                variant="contained"
+                component={Link}
+                to="/Sellerregister"
+                sx={{ mt: 2 }}
+              >
+                Join as Seller
+              </Button>
+            </CenteredContainer>
           ) : (
             <>
-              <Component>
-                <LeftComponent>
+            <Grid
+                container
+                spacing={2}
+                sx={{
+                  px: { xs: 2, md: 4 },
+                  py: 3,
+                  backgroundColor: '#f2f3f4', 
+                  borderRadius: 2,             
+                }}
+              >
+              <Grid
+                  item
+                  xs={12}
+                  md={9}
+                  sx={{ 
+                    padding: 6,                 
+                    borderRadius: 2,         
+                  }}
+                >
                   <Slide products={productData} title="Top Selection" />
-                </LeftComponent>
+                </Grid>
 
-                <RightComponent>
-                  <img src={adURL} alt="" style={{ width: 217 }} />
-                </RightComponent>
-              </Component>
+                <Grid item md={3} sx={{ display: { xs: 'none', md: 'block' } }}>
+                  <AdBox>
+                    <AdImage src={adURL} alt="Ad" />
+                  </AdBox>
+                </Grid>
+              </Grid>
 
-              <Slide products={productData} title="Deals of the Day" />
-              <Slide products={productData} title="Suggested Items" />
-              <Slide products={productData} title="Discounts for You" />
-              <Slide products={productData} title="Recommended Items" />
+              <Section><Slide products={productData} title="Deals of the Day" /></Section>
+              <Section><Slide products={productData} title="Suggested Items" /></Section>
+              <Section><Slide products={productData} title="Discounts for You" /></Section>
+              <Section><Slide products={productData} title="Recommended Items" /></Section>
             </>
           )}
         </>
       )}
-    </div>
+    </Box>
   );
 };
 
 export default Home;
 
-const StyledContainer = styled(Container)`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  justify-content: center;
-  align-items: center;
-`;
 
-const BannerBox = styled(Box)`
-  padding: 20px 10px;
-  background: #F2F2F2;
-`;
-
-const Component = styled(Box)`
-  display: flex;
-`;
-
-const LeftComponent = styled(Box)(({ theme }) => ({
-  width: '83%',
-  [theme.breakpoints.down('md')]: {
-    width: '100%',
-  },
-}));
-
-const RightComponent = styled(Box)(({ theme }) => ({
-  marginTop: 10,
-  background: '#FFFFFF',
-  width: '17%',
-  marginLeft: 10,
-  padding: 5,
-  textAlign: 'center',
-  [theme.breakpoints.down('md')]: {
+const MobileMenuContainer = styled(Container)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  padding: '1rem 0',
+  [theme.breakpoints.up('sm')]: {
     display: 'none',
   },
 }));
+
+const BannerBox = styled(Box)`
+  padding: 20px 10px;
+  background:rgb(48, 212, 204);
+`;
+
+const CenteredContainer = styled(Container)`
+  min-height: 40vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
+
+const AdBox = styled(Box)`
+  background: #73c6b6;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(61, 62, 48, 0.05);
+  text-align: center;
+  height: 90%;
+`;
+
+const AdImage = styled('img')`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+`;
+
+const Section = styled(Box)`
+  margin: 2rem auto;
+  padding: 1rem;
+`;

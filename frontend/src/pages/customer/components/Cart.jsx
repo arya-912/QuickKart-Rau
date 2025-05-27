@@ -166,7 +166,7 @@ const Cart = ({ setIsCartOpen }) => {
                             <Divider sx={{ my: 1 }} />
                             Total Amount = ₹{totalNewPrice}
                         </DetailsContainer>
-                        <Divider sx={{ my: 1, mb: 4 }} />
+                        <Divider sx={{ my: 1, mb: 1 }} />
                         {cartDetails.length > 0 && (
                             <Button
                                 variant="contained"
@@ -282,6 +282,6 @@ const BottomContainer = styled.div`
   justify-content: space-between;
   position: sticky;
   bottom: 0;
-  padding: 16px;
-  background-color: #f8f8f8;
+  padding: 4px;
+  background-color:rgb(190, 189, 214);
 `;
