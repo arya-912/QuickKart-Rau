@@ -59,7 +59,7 @@ const PaymentForm = ({ handleBack }) => {
     const handleRazorpayPayment = async (amount, onSuccess) => {
         setLoading(true);
         try {
-            const { data: order } = await axios.post('http://localhost:5000/createOrder', {
+            const { data: order } = await axios.post('https://quickkart-0mmo.onrender.com/createOrder', {
                 amount,
             });
             const options = {
