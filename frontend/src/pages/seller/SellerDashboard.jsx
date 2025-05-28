@@ -72,7 +72,7 @@ const SellerDashboard = () => {
                         onClick={homeHandler}
                     >
                         <NavLogo>
-                            <LocalMallIcon sx={{ mr: 1, fontSize: '28px', color: '#fff' }} /> SHOPCART
+                            <LocalMallIcon sx={{ mr: 1, fontSize: '28px', color: '#fff' }} /> QUICKKART
                         </NavLogo>
                     </Typography>
 
