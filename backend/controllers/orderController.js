@@ -31,14 +31,23 @@ const newOrder = async (req, res) => {
 
 const getOrderedProductsByCustomer = async (req, res) => {
     try {
-        let orders = await Order.find({ buyer: req.params.id });
+        const orders = await Order.find({ buyer: req.params.id });
 
         if (orders.length > 0) {
-            const orderedProducts = orders.reduce((accumulator, order) => {
-                accumulator.push(...order.orderedProducts);
-                return accumulator;
-            }, []);
-            res.send(orderedProducts);
+        const orderedProducts = [];
+
+        orders.forEach(order => {
+            const orderCreatedAt =  order.createdAt;
+            order.orderedProducts.forEach(product => {
+                orderedProducts.push({
+                    ...product.toObject(),
+                    createdAt: orderCreatedAt,
+                    orderId: order._id,
+                });
+            });
+        });
+        res.send(orderedProducts);
+
         } else {
             res.send({ message: "No products found" });
         }
