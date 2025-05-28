@@ -39,11 +39,6 @@ QuickKart is a lightweight, responsive e-commerce web application designed for l
 1. Sign up and create a profile
 2. Add product using multi-step form
 3. Manage products and view stats/bookmarks
-
-### Admin
-1. Login to access dashboard
-2. Remove flagged users/products
-
 ---
 
 ## 🛠️ Tech Stack
@@ -57,9 +52,12 @@ QuickKart is a lightweight, responsive e-commerce web application designed for l
 | State Mgmt  | Context API                 |
 | Auth        | JWT, bcrypt                 |
 | Forms       | React Hook Form + Yup       |
-| Image Upload| Multer                      |
-| Notifications | React Toastify            |
-| Deployment  | Vercel (Frontend), Render (Backend)
+| Image Upload| Multer                      |            |
+| Deployment  | Render (Frontend), Render (Backend)
+
+Deployment link:-
+
+https://quickkart-0mmo.onrender.com/
 
 ---
 Login 
