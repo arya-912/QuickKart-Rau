@@ -6,6 +6,7 @@ export const productDataList = [
       cost: 4049,
       discountPercent: 42,
     },
+  },
   {
     productName: 'NOVA NHP 8106 Hair Dryer  (1400 W, Black)',
     price: {
@@ -13,6 +14,7 @@ export const productDataList = [
       cost: 1124,
       discountPercent: 40,
     },
+  },
   {
     productName: 'Longway Speedy 300 mm Energy Saving 3 Blade Table Fan  (Black, Pack of 1)',
     price: {
@@ -20,6 +22,7 @@ export const productDataList = [
       cost: 1199,
       discountPercent: 46,
     },
+  },
   {
     productName: 'boAt Rockerz 255 Pro+ /258 Pro+ with ASAP Charge and upto 60 Hours Playback Bluetooth Headset  (Active Black, In the Ear)',
     price: {
@@ -42,6 +45,7 @@ export const productDataList = [
       cost: 9199,
       discountPercent: 38,
     },
+  },
   {
     productName: "APPLE iPhone 13 (Midnight, 128 GB)",
     price: {
@@ -49,6 +53,7 @@ export const productDataList = [
       cost: 14199,
       discountPercent: 30,
     },
+  },
 ];
 
 export const bannerData = [
@@ -56,4 +61,4 @@ export const bannerData = [
   { _id: 2, url: 'https://rukminim1.flixcart.com/flap/3376/560/image/a5320d3f852657e8.jpg?q=50' },
   { _id: 3, url: 'https://rukminim1.flixcart.com/flap/3376/560/image/5df65ad101e18dbf.jpg?q=50' },
   { _id: 4, url: 'https://rukminim1.flixcart.com/flap/3376/560/image/8a89ee09acc1a9e5.jpg?q=50' },
-]
+];
