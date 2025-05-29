@@ -6,14 +6,6 @@ export const productDataList = [
       cost: 4049,
       discountPercent: 42,
     },
-    subcategory: 'Smart Watches',
-    productImage: 'https://rukminim2.flixcart.com/image/416/416/xif0q/smartwatch/a/0/j/4-6-bxio2003-android-ios-beatxp-yes-original-imagt9fsjarfyhfm.jpeg?q=70',
-    category: 'Electronics',
-    description: "High-performance and robust, the beatXP Marv Neo Smartwatch is an excellent addition to your watch collection. It lends high clarity on its up to 4.699 cm (1.85) wide TFT HD display. Additionally, its stylish screen with personalised watch faces offers an appealing appearance. Also, this smartwatch's EzyPair technology ensures a stable connection for hassle-free Bluetooth calling. Moreover, this smartwatch allows you to track your health indicators, such as calorie intake and more while participating in various fitness and sports activities.",
-    tagline: 'Best Seller',
-    quantity: 1,
-    seller: "652ebf61b409f906d81645a3",
-  },
   {
     productName: 'NOVA NHP 8106 Hair Dryer  (1400 W, Black)',
     price: {
@@ -21,14 +13,6 @@ export const productDataList = [
       cost: 1124,
       discountPercent: 40,
     },
-    subcategory: 'Trimmers, Dryers & more',
-    productImage: 'https://rukminim2.flixcart.com/image/416/416/khtghow0pkrrdj-0/hair-dryer/p/o/0/nhp-8106-nova-original-imafxtddk7rdercf.jpeg?q=70',
-    category: 'Personal Care Appliances',
-    description: 'The Nova Professional NHP 8220 Hair Dryer is a powerful and efficient hair styling tool. It operates at 1800 W, making it quick and effective in drying and styling your hair. The multicolor design adds a touch of style to your grooming routine. This hair dryer is perfect for both personal and professional use, offering salon-like results from the comfort of your home. Style your hair effortlessly with Nova Professional NHP 8220 Hair Dryer.',
-    tagline: 'Kubra, Nova & more',
-    quantity: 1,
-    seller: "652ebf61b409f906d81645a3",
-  },
   {
     productName: 'Longway Speedy 300 mm Energy Saving 3 Blade Table Fan  (Black, Pack of 1)',
     price: {
@@ -36,14 +20,6 @@ export const productDataList = [
       cost: 1199,
       discountPercent: 46,
     },
-    subcategory: 'Table Fans',
-    productImage: 'https://rukminim2.flixcart.com/image/416/416/xif0q/fan/s/i/r/speedy-230-1-table-fan-300-longway-original-imagpgp5kzufdcxj.jpeg?q=70',
-    category: 'Home & Kitchen',
-    description: 'Table Fan. Perfect size fan for use on a table, desk or in an RV. Whisper quiet, powerful airflow and reliable operation in a compact 6" size. Two adjustable speeds to customize airflow: high or low settings. Tough break-resistant ABS plastic blades. ',
-    tagline: 'Top Selling',
-    quantity: 1,
-    seller: "652ebf61b409f906d81645a3",
-  },
   {
     productName: 'boAt Rockerz 255 Pro+ /258 Pro+ with ASAP Charge and upto 60 Hours Playback Bluetooth Headset  (Active Black, In the Ear)',
     price: {
@@ -66,14 +42,6 @@ export const productDataList = [
       cost: 9199,
       discountPercent: 38,
     },
-    subcategory: 'Mobile Phones',
-    productImage: "https://rukminim2.flixcart.com/image/416/416/xif0q/mobile/x/x/s/-original-imagfhu6dcpdnqkh.jpeg?q=70",
-    category: 'Electronics',
-    description: 'This smartphone features a terrific 16.62 cm (6.6) FHD+ LCD Display that can effortlessly blow your mind with its incredible performance. Furthermore, this phone boasts a 50 MP Triple Camera setup that allows you to capture awesomeness with a gentle tap. Moreover, the Samsung Galaxy F13 sports up to 8 GB of RAM and features an innovative RAM plus technology that taps into the phone’s internal storage to elevate its performance.',
-    tagline: 'New Arrival',
-    quantity: 1,
-    seller: "652ebf61b409f906d81645a3",
-  },
   {
     productName: "APPLE iPhone 13 (Midnight, 128 GB)",
     price: {
@@ -81,14 +49,6 @@ export const productDataList = [
       cost: 14199,
       discountPercent: 30,
     },
-    subcategory: 'Mobile Phones',
-    productImage: "https://rukminim2.flixcart.com/image/416/416/ktketu80/mobile/s/l/c/iphone-13-mlpf3hn-a-apple-original-imag6vzz5qvejz8z.jpeg?q=70",
-    category: 'Electronics',
-    description: 'iPhone 13. boasts an advanced dual-camera system that allows you to click mesmerising pictures with immaculate clarity. Furthermore, the lightning-fast A15 Bionic chip allows for seamless multitasking, elevating your performance to a new dimension. A big leap in battery life, a durable design, and a bright Super Retina XDR display facilitate boosting your user experience.',
-    tagline: 'New Arrival',
-    quantity: 1,
-    seller: "652ebf61b409f906d81645a3",
-  },
 ];
 
 export const bannerData = [
@@ -96,5 +56,4 @@ export const bannerData = [
   { _id: 2, url: 'https://rukminim1.flixcart.com/flap/3376/560/image/a5320d3f852657e8.jpg?q=50' },
   { _id: 3, url: 'https://rukminim1.flixcart.com/flap/3376/560/image/5df65ad101e18dbf.jpg?q=50' },
   { _id: 4, url: 'https://rukminim1.flixcart.com/flap/3376/560/image/8a89ee09acc1a9e5.jpg?q=50' },
-  { _id: 5, url: 'https://rukminim1.flixcart.com/flap/3376/560/image/ed12b7707a04473c.jpg?q=50' },
 ]
