@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
-// import Grid from '@mui/material/Grid';
+import Grid from '@mui/material/Grid';
 import { Box, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { addStuff } from '../../../redux/userHandle';
@@ -59,7 +59,7 @@ const PaymentForm = ({ handleBack }) => {
     const handleRazorpayPayment = async (amount, onSuccess) => {
         setLoading(true);
         try {
-            const { data: order } = await axios.post('https://quickkart-0mmo.onrender.com/createOrder', {
+            const { data: order } = await axios.post('http://localhost:5000/createOrder', {
                 amount,
             });
             const options = {
